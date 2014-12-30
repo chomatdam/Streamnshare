@@ -1,0 +1,19 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.eseo.streamnshare.MainActivity" >
+
+    <item
+        android:id="@+id/action_shuffle"
+        android:icon="@drawable/rand"
+        android:orderInCategory="1"
+        android:showAsAction="always"
+        android:title="@string/action_shuffle"/>
+    
+    <item 
+        android:id="@+id/action_end"
+        android:icon="@drawable/end"
+        android:orderInCategory="2"
+        android:showAsAction="always"
+        android:title="@string/action_end"/>
+
+</menu>
