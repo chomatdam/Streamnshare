@@ -1,8 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Stream n Share</string>
-    <string name="action_end">End</string>
-    <string name="action_shuffle">Shuffle</string>
+    <string name="app_name">Stream&quot;n&quot;share</string>
+    <string name="playing_activity">En cours...</string>
+        <string-array name="nav_drawer_array">
+        <item>Albums</item>
+        <item>Titres</item>
+        <item>Artistes</item>
+    </string-array>
+    <string name="action_end">Quitter</string>
+    <string name="action_shuffle">Mélanger</string>
+    <string name="action_noshuffle">Normal</string>
+    <string name="action_search">Recherche</string>
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
 
 </resources>
