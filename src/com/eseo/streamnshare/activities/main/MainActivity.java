@@ -1,4 +1,4 @@
-package com.eseo.streamnshare.screens.main;
+package com.eseo.streamnshare.activities.main;
 
 import java.util.ArrayList;
 
@@ -22,13 +22,13 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.eseo.streamnshare.R;
+import com.eseo.streamnshare.activities.fullscreen.FullScreenActivity;
 import com.eseo.streamnshare.fragments.OnItemSelectedFragmentListener;
 import com.eseo.streamnshare.fragments.main.AlbumGridFragment;
 import com.eseo.streamnshare.fragments.main.ArtistListFragment;
 import com.eseo.streamnshare.fragments.main.SongListFragment;
 import com.eseo.streamnshare.managers.MusicManager;
 import com.eseo.streamnshare.model.Song;
-import com.eseo.streamnshare.screens.fullscreen.FullScreenActivity;
 
 public class MainActivity extends FragmentActivity implements OnItemSelectedFragmentListener{
 

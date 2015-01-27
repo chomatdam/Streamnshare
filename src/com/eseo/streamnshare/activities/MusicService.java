@@ -1,11 +1,11 @@
-package com.eseo.streamnshare.screens;
+package com.eseo.streamnshare.activities;
 
 import java.util.ArrayList;
 import java.util.Random;
 
 import com.eseo.streamnshare.R;
+import com.eseo.streamnshare.activities.main.MainActivity;
 import com.eseo.streamnshare.model.Song;
-import com.eseo.streamnshare.screens.main.MainActivity;
 
 import android.app.Notification;
 import android.app.PendingIntent;

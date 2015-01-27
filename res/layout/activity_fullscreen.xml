@@ -9,7 +9,7 @@
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:paddingTop="@dimen/activity_vertical_margin"
-        tools:context="com.eseo.streamnshare.screens.fullscreen.FullScreenActivity" >
+        tools:context="com.eseo.streamnshare.activities.fullscreen.FullScreenActivity" >
 
         <FrameLayout
             android:id="@+id/fullscreen_fragment_placeholder"

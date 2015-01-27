@@ -1,4 +1,4 @@
-package com.eseo.streamnshare.screens;
+package com.eseo.streamnshare.activities;
 
 import android.app.Activity;
 import android.content.Context;
