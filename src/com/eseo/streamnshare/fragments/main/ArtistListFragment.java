@@ -14,7 +14,6 @@ import android.widget.ListView;
 
 import com.eseo.streamnshare.R;
 import com.eseo.streamnshare.adapters.ArtistAdapter;
-import com.eseo.streamnshare.fragments.OnItemSelectedFragmentListener;
 import com.eseo.streamnshare.managers.MusicManager;
 import com.eseo.streamnshare.model.Song;
 

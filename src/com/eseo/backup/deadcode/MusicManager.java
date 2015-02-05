@@ -56,7 +56,7 @@ public class MusicManager {
 				String thisTitle = musicCursor.getString(titleColumn);
 				String thisArtist = musicCursor.getString(artistColumn);
 				String thisAlbumName = musicCursor.getString(albumNameColumn);
-				songList.add(new Song(thisId, thisTitle, thisArtist, thisAlbumName, null));
+				songList.add(new Song(thisId, thisTitle, thisArtist, thisAlbumName,0,null, null));
 
 			}while(musicCursor.moveToNext());
 
@@ -99,10 +99,10 @@ public class MusicManager {
 						JsonObject track = json.getAsJsonObject("message").getAsJsonObject("body").getAsJsonObject("track");
 						String albumName = track.get("album_name").getAsString();
 						String covertArtURL = track.get("album_coverart_350x350").getAsString();
-						songList.add(new Song(thisId, thisTitle, thisArtist, albumName, covertArtURL));
+						songList.add(new Song(thisId, thisTitle, thisArtist, albumName,0,null, covertArtURL));
 					}
 					else
-						songList.add(new Song(thisId, thisTitle, thisArtist, thisAlbumName, null));
+						songList.add(new Song(thisId, thisTitle, thisArtist, thisAlbumName,0,null, null));
 
 				} catch (InterruptedException e) {
 					e.printStackTrace();

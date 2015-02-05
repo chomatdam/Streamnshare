@@ -6,11 +6,18 @@ import java.util.Comparator;
 import java.util.HashMap;
 
 import android.content.ContentResolver;
+import android.content.ContentUris;
 import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
+import android.provider.MediaStore;
+import android.widget.ImageView;
 
+import com.eseo.streamnshare.R;
 import com.eseo.streamnshare.model.Song;
+import com.google.gson.JsonObject;
+import com.koushikdutta.async.future.FutureCallback;
+import com.koushikdutta.ion.Ion;
 
 public class MusicManager {
 
@@ -37,24 +44,19 @@ public class MusicManager {
 
 		//Resolver: provide access to Content Provider (We ask to Provider a result(data) as a client)
 		ContentResolver musicResolver = context.getContentResolver();
-		Uri musicUri = android.provider.MediaStore.Audio.Media.EXTERNAL_CONTENT_URI; //define URI
+		Uri musicUri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI; //define URI
 		Cursor musicCursor = musicResolver.query(musicUri, null, null, null, null); // result
 
-		if(musicCursor!=null && musicCursor.moveToFirst()){
-			//récup colonnes
-			int titleColumn = musicCursor.getColumnIndex(android.provider.MediaStore.Audio.Media.TITLE);
-			int idColumn = musicCursor.getColumnIndex(android.provider.MediaStore.Audio.Media._ID);
-			int artistColumn = musicCursor.getColumnIndex(android.provider.MediaStore.Audio.Media.ARTIST);
-			int albumNameColumn = musicCursor.getColumnIndex(android.provider.MediaStore.Audio.Media.ALBUM);
-			// remplissage liste
-			do{
-				long thisId = musicCursor.getLong(idColumn);
-				String thisTitle = musicCursor.getString(titleColumn);
-				String thisArtist = musicCursor.getString(artistColumn);
-				String thisAlbumName = musicCursor.getString(albumNameColumn);
-				songList.add(new Song(thisId, thisTitle, thisArtist, thisAlbumName, null));
-
-			}while(musicCursor.moveToNext());
+		while(musicCursor.moveToNext()){
+			long id = musicCursor.getLong(musicCursor.getColumnIndexOrThrow(MediaStore.Audio.Media._ID));
+			String title = musicCursor.getString(musicCursor.getColumnIndexOrThrow(MediaStore.Audio.Media.TITLE));
+			String artist = musicCursor.getString(musicCursor.getColumnIndexOrThrow(MediaStore.Audio.Media.ARTIST));
+			String albumName = musicCursor.getString(musicCursor.getColumnIndexOrThrow(MediaStore.Audio.Media.ALBUM));
+			long albumId = musicCursor.getLong(musicCursor.getColumnIndexOrThrow(MediaStore.Audio.Media.ALBUM_ID));
+			long duration = musicCursor.getLong(musicCursor.getColumnIndexOrThrow(MediaStore.Audio.Media.DURATION));
+			Uri externalCovertArtUri = Uri.parse("content://media/external/audio/albumart");
+            Uri albumArtUri = ContentUris.withAppendedId(externalCovertArtUri, albumId);
+			songList.add(new Song(id, title, artist, albumName,duration,albumArtUri.toString(),null));
 
 		}
 
@@ -119,5 +121,39 @@ public class MusicManager {
 				}
 			});
 		}
+		
+		public void getCovertArt(Song currentSong, final ImageView imageView){
+			String request = Requests.getInstance().trackRequest(currentSong.getArtist(), currentSong.getTitle());
+
+			Ion.with(context)
+					.load(request)
+					.asJsonObject()
+					.setCallback(new FutureCallback<JsonObject>() {
+						@Override
+						public void onCompleted(Exception e, JsonObject result) {
+							try {
+								if (e != null)
+									throw e;
+								// find the results and populate
+								int statusCode = result.getAsJsonObject("message").getAsJsonObject("header").get("status_code").getAsInt();
+								if(statusCode == 200){
+									JsonObject track = result.getAsJsonObject("message").getAsJsonObject("body").getAsJsonObject("track");
+									String coverArtURL = track.get("album_coverart_350x350").getAsString();
+									Ion.with(imageView)
+									.placeholder(R.drawable.error)
+									.error(R.drawable.error)
+									.load(coverArtURL);
+								}
+
+							}catch (Exception ex) {
+							}
+
+						}
+					});
+		}
+		
+		
+		
+		
 
 	}

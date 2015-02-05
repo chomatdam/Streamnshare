@@ -7,10 +7,13 @@
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_MULTICAST_STATE"></uses-permission>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"></uses-permission>
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"></uses-permission>
 
     <uses-sdk
-        android:minSdkVersion="14"
-        android:targetSdkVersion="19" />
+        android:minSdkVersion="16"
+        android:targetSdkVersion="21" />
 
     <application
         android:allowBackup="true"
@@ -34,10 +37,12 @@
             android:screenOrientation="portrait" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.eseo.streamnshare.screens.main.MainActivity" />
+                android:value="com.eseo.streamnshare.activities.main.MainActivity" />
         </activity>
 
-        <service android:name="com.eseo.streamnshare.activities.MusicService" />
+        <service android:name="com.eseo.streamnshare.services.NormalService" />
+         <service android:name="com.eseo.streamnshare.services.SourceService" />
+          <service android:name="com.eseo.streamnshare.services.SinkService" />
     </application>
 
 </manifest>

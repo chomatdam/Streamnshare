@@ -12,7 +12,6 @@ import android.widget.ListView;
 
 import com.eseo.streamnshare.R;
 import com.eseo.streamnshare.adapters.SongAdapter;
-import com.eseo.streamnshare.fragments.OnItemSelectedFragmentListener;
 import com.eseo.streamnshare.managers.MusicManager;
 import com.eseo.streamnshare.model.Song;
 
@@ -36,6 +35,7 @@ public class SongListFragment extends ListFragment {
 		super.onActivityCreated(savedInstanceState);
 		if(songList == null)
 			songList = MusicManager.getInstance(getActivity()).getSongList();
+		
 		SongAdapter adapter = new SongAdapter(getActivity(),songList);
 		setListAdapter(adapter);
 	}
